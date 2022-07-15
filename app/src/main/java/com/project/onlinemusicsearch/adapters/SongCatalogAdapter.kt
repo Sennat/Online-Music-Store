@@ -10,14 +10,12 @@ import com.project.onlinemusicsearch.data.SongCatalog
 import com.project.onlinemusicsearch.databinding.SongsListItemBinding
 
 class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val accessSong: (SongCatalog) -> Unit,) : RecyclerView.Adapter<SongCatalogAdapter.SongCatalogViewHolder>() {
-    private lateinit var songPreview: String
 
     inner class SongCatalogViewHolder(private val binding: SongsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(songCatalog : SongCatalog) {
             binding.txtAlbum.text =  songCatalog.trackName
             binding.txtArtistName.text = songCatalog.artistName
-            binding.txtPrice.text = songCatalog.trackPrice.toString()
-            //songPreview = songCatalog.previewUrl
+            binding.txtPrice.text = "Price $ ${songCatalog.trackPrice.toString()}"
 
             Glide.with(binding.txtAlbum)
                 .load(songCatalog.artworkUrl100)
@@ -26,7 +24,6 @@ class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val a
 
             // Open song detail here
             binding.root.setOnClickListener {
-               // songDetail(songCatalog)
                 accessSong(songCatalog)
                 Snackbar.make(it, "${songCatalog.trackName} is playing", 10000).show()
             }

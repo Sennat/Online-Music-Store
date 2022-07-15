@@ -65,14 +65,7 @@ class ClassicFragment : Fragment(), MusicServices {
             })
     }
 
-    /*private fun openSongDetailFragment(songCatalog: SongCatalog) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, SongDetailsFragment.createInstance(songCatalog))
-            .addToBackStack(null)
-            .commit()
-    }*/
-
-    private fun playSong(songCatalog: SongCatalog) {
+    override fun playSong(songCatalog: SongCatalog) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(Uri.parse(songCatalog.previewUrl), "audio/mp4")
         startActivity(intent)

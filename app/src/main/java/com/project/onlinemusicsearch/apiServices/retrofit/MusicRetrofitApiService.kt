@@ -11,8 +11,8 @@ interface MusicRetrofitApiService {
 
     @GET("/search")
     fun getSongsCatalog (
-        // Get dynamic parameters
         //https://itunes.apple.com/search?term=classick&amp;media=music&amp;entity=song&amp;limit=50
+        // Get dynamic parameters
         @Query("term") term: String,
         @Query("amp;media") media: String = "music",
         @Query("amp;entity") entity: String = "song",
