@@ -42,7 +42,7 @@ class SongDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        selectedSong = arguments?.getParcelable(KEY)!!
+        /*selectedSong = arguments?.getParcelable(KEY)!!
 
         binding.apply {
             txtAlbum.text = selectedSong.trackName
@@ -55,7 +55,7 @@ class SongDetailsFragment : Fragment() {
                 .load(selectedSong.artworkUrl100)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(detailsAntwork)
-        }
+        }*/
 
         return binding.root
     }

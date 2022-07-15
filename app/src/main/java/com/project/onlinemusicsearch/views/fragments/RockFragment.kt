@@ -1,5 +1,7 @@
 package com.project.onlinemusicsearch.views.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +52,7 @@ class RockFragment : Fragment(), MusicServices {
                 ) {
                     println(response)
                     if (response.isSuccessful) {
-                        val songCatalogAdapter = SongCatalogAdapter(response.body()!!.results, ::openSongDetailFragment)
+                        val songCatalogAdapter = SongCatalogAdapter(response.body()!!.results, ::playSong)
                         println(response.body())
                         fragmentRockBinding.recyclerView.adapter = songCatalogAdapter
                     }
@@ -62,10 +64,16 @@ class RockFragment : Fragment(), MusicServices {
             })
     }
 
-    private fun openSongDetailFragment(songCatalog: SongCatalog) {
+    /*private fun openSongDetailFragment(songCatalog: SongCatalog) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, SongDetailsFragment.createInstance(songCatalog))
             .addToBackStack(null)
             .commit()
+    }*/
+
+    private fun playSong(songCatalog: SongCatalog) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(Uri.parse(songCatalog.previewUrl), "audio/mp4")
+        startActivity(intent)
     }
 }

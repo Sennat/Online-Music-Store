@@ -4,18 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.project.onlinemusicsearch.R
 import com.project.onlinemusicsearch.data.SongCatalog
 import com.project.onlinemusicsearch.databinding.SongsListItemBinding
 
-class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val songDetail: (SongCatalog) -> Unit) : RecyclerView.Adapter<SongCatalogAdapter.SongCatalogViewHolder>() {
+class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val accessSong: (SongCatalog) -> Unit,) : RecyclerView.Adapter<SongCatalogAdapter.SongCatalogViewHolder>() {
     private lateinit var songPreview: String
 
     inner class SongCatalogViewHolder(private val binding: SongsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(songCatalog : SongCatalog) {
             binding.txtAlbum.text =  songCatalog.trackName
             binding.txtArtistName.text = songCatalog.artistName
-            binding.txtPrice.text = "$ ${songCatalog.trackPrice.toString()}"
+            binding.txtPrice.text = songCatalog.trackPrice.toString()
             //songPreview = songCatalog.previewUrl
 
             Glide.with(binding.txtAlbum)
@@ -25,7 +26,9 @@ class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val s
 
             // Open song detail here
             binding.root.setOnClickListener {
-                songDetail(songCatalog)
+               // songDetail(songCatalog)
+                accessSong(songCatalog)
+                Snackbar.make(it, "${songCatalog.trackName} is playing", 10000).show()
             }
         }
 
@@ -41,6 +44,4 @@ class SongCatalogAdapter(private val songsList: List<SongCatalog>, private val s
     override fun getItemCount(): Int {
         return songsList.size
     }
-
-    //fun clicable(view: View)
 }
